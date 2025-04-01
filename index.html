@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>Mars Rover Photo Explorer</title>
+	<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+	<header>
+		<h1>Mars Rover Photo Explorer</h1>
+		<p>Explore Mars through the lens of NASA's Curiosity Rover 🚀</p>
+	</header>
+
+	<main>
+		<section id="controls">
+			<label for="earth-date">Select Earth Date:</label>
+			<input type="date" id="earth-date" />
+
+			<button id="fetch-btn">Fetch Photos</button>
+
+			<div class="special-events">
+				<h2>Special Events</h2>
+				<button data-date="2015-06-07">Solar Conjunction 2015</button>
+				<button data-date="2018-06-01">Start of Spring (Year 34)</button>
+				<button data-date="2018-12-01">Start of Winter (Year 34)</button>
+			</div>
+		</section>
+
+		<section id="photo-results">
+			<h2>Photos</h2>
+			<div id="photo-container" class="photo-grid"></div>
+		</section>
+	</main>
+
+	<footer>
+		<p>Data provided by NASA's Mars Rover Photos API.</p>
+	</footer>
+
+	<script src="script.js"></script>
+</body>
+</html>
