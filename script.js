@@ -1,5 +1,7 @@
+// API Key
 const API_KEY = "EmHhTKIuzk3g48AGMvUpCdKSCr11l25vwMoWs2ZJ";
 
+// Fetch photos from NASA Mars Rover Photos API
 async function getMarsPhotosByDate(date) {
 	const url = `https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?earth_date=${date}&api_key=${API_KEY}`;
 
@@ -12,6 +14,7 @@ async function getMarsPhotosByDate(date) {
 	return data.photos;
 }
 
+// Display up to 3 photos on the page
 async function displayMarsPhotos(date) {
 	try {
 		const photos = await getMarsPhotosByDate(date);
@@ -23,18 +26,23 @@ async function displayMarsPhotos(date) {
 			return;
 		}
 
-		photos.forEach((photo) => {
+		photos.slice(0, 3).forEach((photo) => {
+			const { img_src, earth_date, rover: { name } } = photo;
+
 			const img = document.createElement("img");
-			img.src = photo.img_src;
-			img.alt = `Photo taken by ${photo.rover.name} on ${photo.earth_date}`;
+			img.src = img_src;
+			img.alt = `Photo taken by ${name} on ${earth_date}`;
 			img.classList.add("rover-photo");
 			photoContainer.appendChild(img);
 		});
 	} catch (error) {
 		console.error("Error fetching Mars photos:", error.message);
+		const photoContainer = document.getElementById("photo-container");
+		photoContainer.innerHTML = `<p>Oops! Something went wrong while fetching photos.</p>`;
 	}
 }
 
+// Handle manual date input fetch
 document.getElementById("fetch-btn").addEventListener("click", () => {
 	const dateInput = document.getElementById("earth-date").value;
 	if (dateInput) {
@@ -42,9 +50,11 @@ document.getElementById("fetch-btn").addEventListener("click", () => {
 	}
 });
 
+// Handle special event buttons
 document.querySelectorAll(".special-events button").forEach((btn) => {
 	btn.addEventListener("click", () => {
 		const date = btn.getAttribute("data-date");
 		displayMarsPhotos(date);
 	});
 });
+
