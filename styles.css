@@ -1,19 +1,17 @@
-/* Import a NASA-like font */
 @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500&family=Roboto&display=swap');
 
 body {
 	font-family: 'Roboto', sans-serif;
 	margin: 0;
 	padding: 0;
-	background-color: #0b0c10; /* Deep space black */
+	background-color: #0b0c10;
 	color: #ffffff;
 	line-height: 1.6;
 }
 
-/* Header with space feel */
 header {
-	background-color: #1f2833; /* Dark steel */
-	color: #66fcf1; /* Teal-like highlight */
+	background-color: #1f2833;
+	color: #66fcf1;
 	padding: 2rem;
 	text-align: center;
 	border-bottom: 3px solid #45a29e;
@@ -32,7 +30,6 @@ main {
 	margin: auto;
 }
 
-/* Controls Section */
 #controls {
 	margin-bottom: 2rem;
 	display: flex;
@@ -81,16 +78,23 @@ button:hover {
 	margin: 0.25rem;
 }
 
-/* Description + Grid Layout */
 #photo-results {
 	margin-top: 2rem;
+}
+
+.gallery-wrapper {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	text-align: center;
 }
 
 .photo-description {
 	font-size: 1.1rem;
 	margin-bottom: 1rem;
-	text-align: center;
 	color: #c5c6c7;
+	max-width: 600px;
 }
 
 .photo-grid {
@@ -98,6 +102,7 @@ button:hover {
 	grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
 	gap: 1.5rem;
 	justify-content: center;
+	width: 100%;
 }
 
 .photo-item {
@@ -126,7 +131,6 @@ button:hover {
 	font-size: 0.9rem;
 }
 
-/* Footer */
 footer {
 	margin-top: 2rem;
 	text-align: center;

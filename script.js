@@ -18,19 +18,24 @@ function renderPhotos(photos, description) {
 	const photoContainer = document.getElementById("photo-container");
 	photoContainer.innerHTML = "";
 
-	// Add description above the gallery
+	// Create a wrapper to center everything
+	const galleryWrapper = document.createElement("div");
+	galleryWrapper.classList.add("gallery-wrapper");
+
+	// Add caption/description
 	const descriptionEl = document.createElement("p");
 	descriptionEl.classList.add("photo-description");
 	descriptionEl.textContent = description;
-	photoContainer.appendChild(descriptionEl);
+	galleryWrapper.appendChild(descriptionEl);
 
-	// Create a grid for photos
+	// Create grid for images
 	const grid = document.createElement("div");
 	grid.classList.add("photo-grid");
 
 	if (photos.length === 0) {
 		grid.innerHTML = `<p>No photos available for this date.</p>`;
-		photoContainer.appendChild(grid);
+		galleryWrapper.appendChild(grid);
+		photoContainer.appendChild(galleryWrapper);
 		return;
 	}
 
@@ -53,14 +58,15 @@ function renderPhotos(photos, description) {
 		grid.appendChild(photoWrapper);
 	});
 
-	photoContainer.appendChild(grid);
+	galleryWrapper.appendChild(grid);
+	photoContainer.appendChild(galleryWrapper);
 }
 
-// Display photos for a selected date
+// Display photos for selected date
 async function displayMarsPhotos(date) {
 	try {
 		const photos = await getMarsPhotosByDate(date);
-		renderPhotos(photos, `Photos taken on ${date}`);
+		renderPhotos(photos, `📅 Photos taken on ${date}`);
 	} catch (error) {
 		console.error("Error fetching Mars photos:", error.message);
 		const photoContainer = document.getElementById("photo-container");
@@ -68,10 +74,10 @@ async function displayMarsPhotos(date) {
 	}
 }
 
-// Load initial set of photos when the page loads
+// Load initial photos on page load
 async function loadInitialPhotos() {
-	const initialDate = "2015-05-31"; // Sol 1000
-	const description = `Celebrating Sol 1000 on Mars — photos taken by Curiosity on May 31, 2015.`;
+	const initialDate = "2015-05-31"; // Sol 1000 milestone
+	const description = `✨ Celebrating Sol 1000 on Mars — photos taken by Curiosity on May 31, 2015.`;
 	try {
 		const photos = await getMarsPhotosByDate(initialDate);
 		renderPhotos(photos, description);
@@ -80,7 +86,7 @@ async function loadInitialPhotos() {
 	}
 }
 
-// Fetch button logic
+// Fetch button
 document.getElementById("fetch-btn").addEventListener("click", () => {
 	const dateInput = document.getElementById("earth-date").value;
 	if (dateInput) {
@@ -96,8 +102,9 @@ document.querySelectorAll(".special-events button").forEach((btn) => {
 	});
 });
 
-// Run on page load
+// Load default photos
 window.addEventListener("DOMContentLoaded", loadInitialPhotos);
+
 
 
 
